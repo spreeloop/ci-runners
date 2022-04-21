@@ -7,7 +7,7 @@ https://cloud.google.com/sdk/docs/install
 ### Navigate to the app engine runner directory
 
 ```
-cd pipelines_runners/gcp_app_engine
+cd gcp/app_engine
 ```
 
 ### Deploy
