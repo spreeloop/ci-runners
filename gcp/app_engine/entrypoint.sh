@@ -11,16 +11,13 @@ cleanup() {
   ./config.sh remove --token "${TOKEN}"
 }
 
-# Delete any runner with such name.
-curl -X DELETE -H "Accept: application/vnd.github.v3+json" -H "authorization: token ${GITHUB_RUNNERS_TOKEN}" https://api.github.com/orgs/${ORG}/actions/runners/${NAME}
-
 ./config.sh \
   --url "https://github.com/${ORG}" \
   --token "${TOKEN}" \
   --name "${NAME}" \
   --unattended \
   --work _work \
-  --labels gcp,app-engine
+  --labels gcp,app-engine,standard
 
 ./runsvc.sh
 
