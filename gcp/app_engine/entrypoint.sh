@@ -2,7 +2,7 @@
 set -eEuo pipefail
 
 ORG="spreeloop"
-NAME="gcp-app-engine-elastic"
+NAME="gae-runner-elastic"
 GITHUB_RUNNERS_TOKEN=$(gcloud secrets versions access latest --secret="GITHUB_RUNNERS_TOKEN")
 
 TOKEN=$(curl -s -X POST -H "authorization: token ${GITHUB_RUNNERS_TOKEN}" "https://api.github.com/orgs/${ORG}/actions/runners/registration-token" | jq -r .token)
