@@ -4,7 +4,12 @@ ENV RUNNER_VERSION=2.290.1
 ENV FLUTTER_SDK_VERSION=2.10.4
 
 RUN useradd -m actions
-RUN apt-get -yqq update && apt-get install -yqq curl jq wget git
+RUN apt-get -yqq update && apt-get install -yqq curl jq wget
+
+# Install a recent version of Git.
+RUN add-apt-repository ppa:git-core/ppa -y
+RUN apt-get -yqq update && apt-get -yqq install git
+RUN git --version
 
 # Install Python3.8.
 RUN apt-get install -yqq python
