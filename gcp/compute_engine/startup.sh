@@ -27,6 +27,11 @@ apt-get -yqq install \
     gnupg \
     lsb-release
 
+# Install a recent version of Git.
+add-apt-repository ppa:git-core/ppa -y
+apt-get -yqq update && apt-get -yqq install git
+git --version
+
 # Install Docker.
 # Source: https://docs.docker.com/engine/install/ubuntu/
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -56,7 +61,7 @@ RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh \
   --unattended \
   --replace \
   --work "/runner-tmp" \
-  --labels gcp,compute-engine,micro
+  --labels gcp,compute-engine,e2-medium
 
 ## Install and start runner service.
 cd /runner || exit
