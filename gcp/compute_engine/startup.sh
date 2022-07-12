@@ -14,6 +14,10 @@
 # limitations under the License.
 set -eEuo pipefail
 
+# Set ImageOS which is required for Ruby installation.
+echo 'export ImageOS=ubuntu18' >> ~/.bashrc
+source ~/.bashrc
+
 # Install pre-requisites.
 apt-get update
 apt-get -yqq install \
