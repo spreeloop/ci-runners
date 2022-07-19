@@ -14,7 +14,10 @@
 # limitations under the License.
 
 # Get GITHUB_RUNNERS_TOKEN secret.
+ORG="spreeloop"
+NAME="${HOSTNAME}"
 GITHUB_RUNNERS_TOKEN=$(gcloud secrets versions access latest --secret="GITHUB_RUNNERS_TOKEN")
+TOKEN=$(curl -s -X POST -H "authorization: token ${GITHUB_RUNNERS_TOKEN}" "https://api.github.com/orgs/${ORG}/actions/runners/registration-token" | jq -r .token)
 
 # Stop and uninstall the runner service.
 cd /runner || exit
@@ -22,4 +25,6 @@ cd /runner || exit
 ./svc.sh uninstall
 
 # Remove the runner configuration.
-RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh remove --unattended --token "$(curl -sS --request POST --url "https://api.github.com/orgs/spreeloop/actions/runners/remove-token" --header "authorization: Bearer ${GITHUB_RUNNERS_TOKEN}"  --header "content-type: application/json" | jq -r .token)"
+RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh remove \
+  --unattended \
+  --token "${TOKEN}"

@@ -14,10 +14,6 @@
 # limitations under the License.
 set -eEuo pipefail
 
-# Set ImageOS which is required for Ruby installation.
-echo 'export ImageOS=ubuntu18' >> ~/.bashrc
-source ~/.bashrc
-
 # Install pre-requisites.
 apt-get update
 apt-get -yqq install \
@@ -61,7 +57,7 @@ RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh \
   --unattended \
   --replace \
   --work "/runner-tmp" \
-  --labels gcp,compute-engine,e2-medium
+  --labels gcp,compute-engine,e2-small
 
 ## Install and start runner service.
 cd /runner || exit
