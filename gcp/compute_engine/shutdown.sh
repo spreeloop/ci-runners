@@ -26,5 +26,4 @@ cd /runner || exit
 
 # Remove the runner configuration.
 RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh remove \
-  --unattended \
   --token "${TOKEN}"

@@ -14,19 +14,22 @@
 # limitations under the License.
 set -eEuo pipefail
 
-# Install pre-requisites.
-apt-get update
+# Install pre-requisites (for Secrets, Fastlane, Flutter).
+add-apt-repository ppa:git-core/ppa -y
+apt-get -yqq update
 apt-get -yqq install \
     jq \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release
-
-# Install a recent version of Git.
-add-apt-repository ppa:git-core/ppa -y
-apt-get -yqq update && apt-get -yqq install git
-git --version
+    lsb-release \
+    build-essential \
+    curl \
+    git \
+    unzip \
+    xz-utils \
+    zip \
+    libglu1-mesa
 
 # Install Docker.
 # Source: https://docs.docker.com/engine/install/ubuntu/
@@ -44,7 +47,6 @@ GITHUB_RUNNERS_TOKEN=$(gcloud secrets versions access latest --secret="GITHUB_RU
 TOKEN=$(curl -s -X POST -H "authorization: token ${GITHUB_RUNNERS_TOKEN}" "https://api.github.com/orgs/${ORG}/actions/runners/registration-token" | jq -r .token)
 
 ## Download runner software.
-mkdir /runner-tmp
 mkdir /runner && cd /runner
 curl -o actions-runner-linux-x64-2.290.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.290.1/actions-runner-linux-x64-2.290.1.tar.gz
 echo "2b97bd3f4639a5df6223d7ce728a611a4cbddea9622c1837967c83c86ebb2baa  actions-runner-linux-x64-2.290.1.tar.gz" | shasum -a 256 -c
@@ -57,7 +59,10 @@ RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh \
   --unattended \
   --replace \
   --work "/runner-tmp" \
-  --labels gcp,compute-engine,e2-small
+  --labels gcp,compute-engine,e2-medium
+
+# Ignore ownership issues on the flutter directory.
+git config --system --add safe.directory /runner-tmp/_tool/flutter
 
 ## Install and start runner service.
 cd /runner || exit
