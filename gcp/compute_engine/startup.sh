@@ -18,25 +18,25 @@ set -eEuo pipefail
 add-apt-repository ppa:git-core/ppa -y
 apt-get -yqq update
 apt-get -yqq install \
-    jq \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release \
-    build-essential \
-    curl \
-    git \
-    unzip \
-    xz-utils \
-    zip \
-    libglu1-mesa
+  jq \
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release \
+  build-essential \
+  curl \
+  git \
+  unzip \
+  xz-utils \
+  zip \
+  libglu1-mesa
 
 # Install Docker.
 # Source: https://docs.docker.com/engine/install/ubuntu/
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list >/dev/null
 apt-get update
 apt-get -yqq install docker-ce
 
