@@ -63,6 +63,9 @@ RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh \
 
 # Ignore ownership issues on the flutter directory.
 git config --system --add safe.directory /runner-tmp/_tool/flutter
+git config --system --add safe.directory /runner-tmp/_tool/flutter/stable-3.3.10-x64
+git config --global --add safe.directory /runner-tmp/_tool/flutter
+git config --global --add safe.directory /runner-tmp/_tool/flutter/stable-3.3.10-x64
 
 ## Install and start runner service.
 cd /runner || exit
