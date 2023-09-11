@@ -61,10 +61,14 @@ RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh \
   --work "/runner-tmp" \
   --labels gcp,compute-engine,e2-medium
 
-# Ignore ownership issues on the flutter directory.
-git config --system --add safe.directory /runner-tmp/_tool/flutter
-
 ## Install and start runner service.
 cd /runner || exit
 ./svc.sh install
 ./svc.sh start
+
+# Ignore ownership issues on the flutter directory.
+# These commands seem to fail on startup.
+# git config --system --add safe.directory /runner-tmp/_tool/flutter
+# git config --system --add safe.directory /runner-tmp/_tool/flutter/stable-3.3.10-x64
+# git config --global --add safe.directory /runner-tmp/_tool/flutter
+# git config --global --add safe.directory /runner-tmp/_tool/flutter/stable-3.3.10-x64
