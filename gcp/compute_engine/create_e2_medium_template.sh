@@ -2,7 +2,7 @@
 
 gcloud compute instance-templates create gh-runner-e2-medium-50gb-template \
     --project=spreeloop-ci-runners \
-    --image-family=ubuntu-1804-lts \
+    --image-family=ubuntu-2204-lts \
     --image-project=ubuntu-os-cloud \
     --boot-disk-type=pd-balanced \
     --boot-disk-size=50GB \
