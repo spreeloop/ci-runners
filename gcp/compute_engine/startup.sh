@@ -31,6 +31,9 @@ apt-get -yqq install \
   zip \
   libglu1-mesa
 
+# Ignore ownership issues on the flutter directory.
+git config --system --add safe.directory '*'
+
 # Install Docker.
 # Source: https://docs.docker.com/engine/install/ubuntu/
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -60,9 +63,6 @@ RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh \
   --replace \
   --work "/runner-tmp" \
   --labels gcp,compute-engine,e2-medium
-
-# Ignore ownership issues on the flutter directory.
-git config --system --add safe.directory /runner-tmp/_tool/flutter
 
 ## Install and start runner service.
 cd /runner || exit
