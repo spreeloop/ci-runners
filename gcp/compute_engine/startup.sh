@@ -62,7 +62,7 @@ RUNNER_ALLOW_RUNASROOT=1 /runner/config.sh \
   --unattended \
   --replace \
   --work "/runner-tmp" \
-  --labels gcp,compute-engine,e2-medium
+  --labels gcp,compute-engine,e2-standard-4
 
 ## Install and start runner service.
 cd /runner || exit
