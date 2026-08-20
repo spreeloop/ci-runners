@@ -38,7 +38,7 @@ sudo tailscale up
 
 ---
 
-### 3. Connecting to the Mac Mini
+### 3. Connecting to the Mac Mini (SSH)
 
 Once authenticated, connect directly to the shared admin profile:
 
@@ -49,3 +49,14 @@ ssh sharedadmin@spreeloop-macmini-m4
 * **No Password Required:** Tailscale validates your identity and securely logs you in.
 * **Session Warning:** You will see a notice stating that the session is being recorded.
 * **Passwordless Sudo:** The `sharedadmin` account is pre-configured to run root commands without a password prompt (e.g., `sudo ls /root`).
+
+---
+
+### 4. Connecting to the Mac Mini (GUI using VNC)
+
+Once authenticated:
+
+1. Open Finder.
+2. Hit command + K.
+3. Type in `vnc://spreeloop-macmini-m4`.
+4. Connect using sharedadmin credentials from 1Password.
